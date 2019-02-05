@@ -14,20 +14,7 @@ class App extends Component {
     const name = window.prompt('Name?')
     if(!name) return
     const card = { name }
-    this.setState(prevState => {
-      const { columns } = prevState
-      columns[columnIndex].cards.push(card)
-      return { columns }
-    })
-  }
-  
-  handleMove = (columnIndex, cardIndex, direction) => {
-    this.setState(prevState => {
-      const { columns } = prevState
-      const [card] = columns[columnIndex].cards.splice(cardIndex, 1)
-      columns[columnIndex + direction].cards.push(card)
-      return { columns }
-    })
+    this.props.addCard(columnIndex, card)
   }
 
   render() {
@@ -39,8 +26,8 @@ class App extends Component {
           column={column} 
           columnIndex={columnIndex} 
           key={columnIndex}
-          onMoveLeft={cardIndex => this.handleMove(columnIndex, cardIndex, DIRECTION_LEFT)}
-          onMoveRight={cardIndex => this.handleMove(columnIndex, cardIndex, DIRECTION_RIGHT)}
+          onMoveLeft={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_LEFT)}
+          onMoveRight={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_RIGHT)}
           onAddCard={() => this.handleAdd(columnIndex)}
          />
        ))}
@@ -54,8 +41,8 @@ const mapStateToProps = ({columns}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  add_card: (columnIndex) => dispatch({type: ADD_CARD, columnIndex}),
-  move_card: (columnIndex, cardIndex, direction) => dispatch({type: MOVE_CARD, columnIndex, cardIndex, direction}),
+  addCard: (columnIndex, card) => dispatch({type: ADD_CARD, columnIndex, card}),
+  moveCard: (columnIndex, cardIndex, direction) => dispatch({type: MOVE_CARD, columnIndex, cardIndex, direction}),
   load: () => dispatch({type: LOAD})
 })
 
