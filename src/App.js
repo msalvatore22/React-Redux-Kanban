@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { ADD_CARD, MOVE_CARD, LOAD} from './actions'
 import Column from './Column'
 import './App.css';
 
@@ -6,32 +8,7 @@ const DIRECTION_LEFT = -1
 const DIRECTION_RIGHT = 1
 
 class App extends Component {
-  constructor(props){
-    super(props)
-    
-    this.state = {
-      columns: [
-        {
-          name: 'Need To Do',
-          cards: [
-            {name: 'Card A'}
-          ]
-        },
-        {
-          name: 'Doing',
-          cards: [
-            {name: 'Card B'}
-          ]
-        },
-        {
-          name: 'Done',
-          cards: [
-            {name: 'Card C'}
-          ]
-        }
-      ]
-    }
-  }
+  componentDidMount = () => this.props.load()
 
   handleAdd = columnIndex => {
     const name = window.prompt('Name?')
@@ -54,9 +31,10 @@ class App extends Component {
   }
 
   render() {
+    if(!this.props.columns) return null
     return (
       <div className="App">
-       {this.state.columns.map((column, columnIndex) => (
+       {this.props.columns.map((column, columnIndex) => (
          <Column 
           column={column} 
           columnIndex={columnIndex} 
@@ -71,4 +49,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({columns}) => ({
+  columns
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  add_card: (columnIndex) => dispatch({type: ADD_CARD, columnIndex}),
+  move_card: (columnIndex, cardIndex, direction) => dispatch({type: MOVE_CARD, columnIndex, cardIndex, direction}),
+  load: () => dispatch({type: LOAD})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
