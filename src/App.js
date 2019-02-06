@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { ADD_CARD, MOVE_CARD, LOAD} from './actions'
+import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD} from './actions'
 import Column from './Column'
 import './App.css';
 
@@ -29,6 +29,7 @@ class App extends Component {
           onMoveLeft={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_LEFT)}
           onMoveRight={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_RIGHT)}
           onAddCard={() => this.handleAdd(columnIndex)}
+          onDelete={cardIndex => this.props.deleteCard(cardIndex,columnIndex)}
          />
        ))}
       </div>
@@ -43,7 +44,8 @@ const mapStateToProps = ({columns}) => ({
 const mapDispatchToProps = (dispatch) => ({
   addCard: (columnIndex, card) => dispatch({type: ADD_CARD, columnIndex, card}),
   moveCard: (columnIndex, cardIndex, direction) => dispatch({type: MOVE_CARD, columnIndex, cardIndex, direction}),
-  load: () => dispatch({type: LOAD})
+  load: () => dispatch({type: LOAD}),
+  deleteCard: (cardIndex, columnIndex) => dispatch({type: DELETE_CARD, cardIndex, columnIndex})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

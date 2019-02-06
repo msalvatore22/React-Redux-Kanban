@@ -56,6 +56,20 @@ export default (state = {}, action) => {
       columns[columnIndex + direction].cards.push(card)
       return { ...state, columns }
     }
+    case actions.DELETE_CARD: {
+      const { cardIndex, columnIndex } = action
+      // clone columns parent array
+      const columns = [...state.columns]
+      // clone source
+      columns[columnIndex] = {
+        ...columns[columnIndex],
+        cards: [...columns[columnIndex].cards]
+      }
+      // splice card from column at the index
+      columns[columnIndex].cards.splice(cardIndex, 1)
+      return {...state, columns}
+    }
+    default:
+      return state
   }
-  return state
 }

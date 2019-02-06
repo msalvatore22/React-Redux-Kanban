@@ -9,6 +9,13 @@
   border: 1px #ccc solid;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px #eee solid;
+}
+
 .card {
   padding: 30px;
   display: flex;
