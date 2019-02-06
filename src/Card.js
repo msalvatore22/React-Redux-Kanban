@@ -1,6 +1,14 @@
 import React from 'react';
 
-export default ({card, canMoveLeft, canMoveRight, onMoveLeft, onMoveRight, onDelete}) => (
+export default (
+  {
+    card, 
+    canMoveLeft, 
+    canMoveRight, 
+    onMoveLeft, 
+    onMoveRight, 
+    onDelete
+  }) => (
   <div className="card-container">
     <div className="card">
       {canMoveLeft && <button onClick={onMoveLeft}>{'<'}</button>}

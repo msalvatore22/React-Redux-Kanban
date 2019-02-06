@@ -25,6 +25,12 @@ export default (state = {}, action) => {
         }
       ]
     };
+    case actions.ADD_COLUMN: {
+      const { column } = action
+      const columns = [...state.columns]
+      columns.push(column)
+      return {...state, columns}
+    }
     case actions.ADD_CARD: {
       const { columnIndex, card } = action
       const columns = [...state.columns]
