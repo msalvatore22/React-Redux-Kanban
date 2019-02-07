@@ -1,4 +1,5 @@
 import * as actions from '../actions'
+import deepFreeze from 'deep-freeze'
 
 export default (state = {}, action) => {
   switch(action.type) {
@@ -73,6 +74,18 @@ export default (state = {}, action) => {
       }
       // splice card from column at the index
       columns[columnIndex].cards.splice(cardIndex, 1)
+      return {...state, columns}
+    }
+    case actions.EDIT_CARD: {
+      deepFreeze(state)
+      const {cardIndex, columnIndex, name} = action
+      const columns = [...state.columns]
+      columns[columnIndex] = {
+        ...columns[columnIndex],
+        cards: [...columns[columnIndex].cards]
+      }
+      columns[columnIndex].cards.splice(cardIndex, 1)
+      columns[columnIndex].cards.push(name)
       return {...state, columns}
     }
     default:

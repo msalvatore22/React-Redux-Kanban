@@ -7,7 +7,8 @@ export default (
     onMoveLeft, 
     onMoveRight, 
     onAddCard, 
-    onDelete, 
+    onDelete,
+    onEditCard, 
     length
   }) => (
   <div className="column">
@@ -22,6 +23,7 @@ export default (
         onMoveLeft={() => onMoveLeft(cardIndex)}
         onMoveRight={() => onMoveRight(cardIndex)}
         onDelete={()=> onDelete(cardIndex)}
+        onEditCard={(name) => onEditCard(cardIndex, name)}
       />
     ))}
     <button onClick={onAddCard}>+</button>

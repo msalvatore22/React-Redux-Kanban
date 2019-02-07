@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD, ADD_COLUMN} from '../actions'
+import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD, ADD_COLUMN, EDIT_CARD} from '../actions'
 import Column from './Column'
 import '../App.css';
 
@@ -40,6 +40,7 @@ class App extends Component {
             onMoveRight={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_RIGHT)}
             onAddCard={() => this.handleAdd(columnIndex)}
             onDelete={cardIndex => this.props.deleteCard(cardIndex,columnIndex)}
+            onEditCard={(cardIndex, name) => this.props.editCard(cardIndex, columnIndex, name)}
           />
         ))}
         </div>
@@ -57,7 +58,8 @@ const mapDispatchToProps = (dispatch) => ({
   moveCard: (columnIndex, cardIndex, direction) => dispatch({type: MOVE_CARD, columnIndex, cardIndex, direction}),
   load: () => dispatch({type: LOAD}),
   deleteCard: (cardIndex, columnIndex) => dispatch({type: DELETE_CARD, cardIndex, columnIndex}),
-  addColumn: (column) => dispatch({type: ADD_COLUMN, column})
+  addColumn: (column) => dispatch({type: ADD_COLUMN, column}),
+  editCard: (cardIndex, columnIndex, name) => dispatch({type: EDIT_CARD, cardIndex, columnIndex, name})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
