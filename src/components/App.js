@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD, ADD_COLUMN} from './actions'
+import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD, ADD_COLUMN} from '../actions'
 import Column from './Column'
-import './App.css';
+import '../App.css';
 
 const DIRECTION_LEFT = -1
 const DIRECTION_RIGHT = 1
@@ -48,9 +48,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({columns}) => ({
-  columns
-})
+function mapStateToProps(state){
+  return state.boards
+}
 
 const mapDispatchToProps = (dispatch) => ({
   addCard: (columnIndex, card) => dispatch({type: ADD_CARD, columnIndex, card}),

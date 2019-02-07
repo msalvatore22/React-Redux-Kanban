@@ -1,4 +1,4 @@
-import * as actions from './actions'
+import * as actions from '../actions'
 
 export default (state = {}, action) => {
   switch(action.type) {
