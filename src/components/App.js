@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD, ADD_COLUMN, EDIT_CARD} from '../actions'
+import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD, ADD_COLUMN, EDIT_CARD, REMOVE_COLUMN, EDIT_COLUMN} from '../actions'
 import Column from './Column'
 import '../App.css';
 
@@ -41,6 +41,8 @@ class App extends Component {
             onAddCard={() => this.handleAdd(columnIndex)}
             onDelete={cardIndex => this.props.deleteCard(cardIndex,columnIndex)}
             onEditCard={(cardIndex, name) => this.props.editCard(cardIndex, columnIndex, name)}
+            onRemove={() => this.props.removeColumn(columnIndex)}
+            onEditColumn={(name) => this.props.editColumn(columnIndex, name)}
           />
         ))}
         </div>
@@ -59,7 +61,9 @@ const mapDispatchToProps = (dispatch) => ({
   load: () => dispatch({type: LOAD}),
   deleteCard: (cardIndex, columnIndex) => dispatch({type: DELETE_CARD, cardIndex, columnIndex}),
   addColumn: (column) => dispatch({type: ADD_COLUMN, column}),
-  editCard: (cardIndex, columnIndex, name) => dispatch({type: EDIT_CARD, cardIndex, columnIndex, name})
+  editCard: (cardIndex, columnIndex, name) => dispatch({type: EDIT_CARD, cardIndex, columnIndex, name}),
+  removeColumn: (columnIndex) => dispatch({type: REMOVE_COLUMN, columnIndex }),
+  editColumn: (columnIndex, name) => dispatch({type: EDIT_COLUMN, columnIndex, name})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

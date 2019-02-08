@@ -32,6 +32,25 @@ export default (state = {}, action) => {
       columns.push(column)
       return {...state, columns}
     }
+    case actions.REMOVE_COLUMN: {
+      const { columnIndex } = action
+      const columns = [...state.columns]
+      columns.splice(columnIndex, 1)
+      return {...state, columns}
+    }
+    case actions.EDIT_COLUMN: {
+      deepFreeze(state)
+      const { columnIndex, name } = action
+      const columns = [...state.columns]
+      columns[columnIndex] = {
+        ...columns[columnIndex],
+        cards: [
+          ...columns[columnIndex].cards
+        ]
+      }
+      Object.assign(columns[columnIndex], name)
+      return {...state, columns}
+    }
     case actions.ADD_CARD: {
       const { columnIndex, card } = action
       const columns = [...state.columns]
@@ -77,7 +96,6 @@ export default (state = {}, action) => {
       return {...state, columns}
     }
     case actions.EDIT_CARD: {
-      deepFreeze(state)
       const {cardIndex, columnIndex, name} = action
       const columns = [...state.columns]
       columns[columnIndex] = {

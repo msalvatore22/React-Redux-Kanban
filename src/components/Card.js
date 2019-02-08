@@ -13,7 +13,10 @@ class Card extends Component {
     const {onEditCard} = this.props
     const name = {name: newName}
     onEditCard(name)
+    this.clearInput()
   }
+
+  clearInput = () => this.setState({newName: ''})
 
 
   render(){
