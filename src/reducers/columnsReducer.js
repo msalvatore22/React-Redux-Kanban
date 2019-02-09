@@ -7,7 +7,7 @@ export default (state = {}, action) => {
     return {
       columns: [
         {
-          name: 'Need To Do',
+          name: 'To Do',
           cards: [
             {name: 'Card A'}
           ]
@@ -39,7 +39,6 @@ export default (state = {}, action) => {
       return {...state, columns}
     }
     case actions.EDIT_COLUMN: {
-      deepFreeze(state)
       const { columnIndex, name } = action
       const columns = [...state.columns]
       columns[columnIndex] = {

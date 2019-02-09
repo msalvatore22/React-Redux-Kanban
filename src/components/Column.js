@@ -3,7 +3,8 @@ import Card from './Card'
 
 class Column extends Component {
   state = {
-    newName: ""
+    newName: "",
+    showInput: false
   }
 
   handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
@@ -15,10 +16,28 @@ class Column extends Component {
     const name = {name: newName}
     onEditColumn(name)
     this.clearInput()
+    this.toggleInput()
   }
 
   clearInput = () => this.setState({newName: ''})
   
+  toggleInput = () => {
+    if(!this.state.showInput){
+      document.addEventListener('click', this.handleOutsideClick, false)
+    } else {
+      document.removeEventListener('click', this.handleOutsideClick, false)
+    }
+    this.setState(prevState => ({
+      showInput: !prevState.showInput}))
+  }
+
+  handleOutsideClick = (e) => {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    
+    this.toggleInput();
+  }
 
 
 render(){
@@ -31,19 +50,22 @@ render(){
     onEditCard, 
     length,
     onRemove } = this.props
+  const {showInput, newName} = this.state
   return (
     <div className="column">
-      <h1>{column.name}</h1>
-      <form onSubmit={this.handleSubmit}>
-        <input 
-          type="text"
-          name="newName"
-          value={this.state.newName}
-          placeholder={column.name}
-          onChange={this.handleChange}
-        />
-      </form>
-      <button onClick={onRemove}>delete</button>
+      {showInput ?
+        <form onSubmit={this.handleSubmit} ref={node => {this.node = node}}>
+          <input 
+            type="text"
+            name="newName"
+            value={newName}
+            placeholder={column.name}
+            onChange={this.handleChange}
+          />
+        </form>
+      : <h1 onClick={this.toggleInput}>{column.name}</h1>
+      }
+      {showInput ? null : <button onClick={onRemove}>delete column</button>}
       {column.cards.map((card, cardIndex) => (
         <Card 
           key={cardIndex}
@@ -57,7 +79,7 @@ render(){
           onEditCard={(name) => onEditCard(cardIndex, name)}
         />
       ))}
-      <button onClick={onAddCard}>+</button>
+      <button onClick={onAddCard}>+ add card</button>
     </div> 
   )}
 }
