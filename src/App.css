@@ -1,26 +1,107 @@
+.body {
+  overflow-x: scroll;
+}
+
 .App {
-  display: flex;
+  display: inline-flex;
+  margin-right: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(70, 70, 70, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(204, 204, 204, 0.5); 
 }
 
 .column {
-  flex-grow: 1;
-  text-align: center;
-  margin: 25px;
-  border: 1px #ccc solid;
+  width: 300px;
+  padding: 10px;
+  padding-bottom: 30px;
+  padding-top: 0;
+  margin: 0px 5px;
+  background: #F0EFF1;
+  border-radius: 5px;
+  position: relative;
+  height: 0%;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
-.card-container {
+.column p {
+  margin: 2px;
+}
+
+.add-column-btn {
+  height: 0%;
+  width: 100px;
+}
+
+.remove-column-btn {
+  margin-left: 96%;
+  border-radius: 2px;
+  border: none;
+  background: #F0EFF1;
+  color: red;
+}
+
+.add-card-btn {
+  position: absolute;
+  bottom: 10px;
+}
+
+.column:first-child {
+  margin-left: 10px;
+}
+
+.column:last-of-type {
+  margin-right: 10px;
+}
+
+.delete-btn-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 1px #eee solid;
+  justify-content: flex-end;
+  margin-right: 2px;
+}
+
+.delete-card-btn {
+  background: #F7F7F8;
+  border: none;
+  color: red;
+  border-radius: 2px;
+}
+
+.delete-card-btn:hover {
+  background: red;
+  color: #F7F7F8;
 }
 
 .card {
-  padding: 30px;
   display: flex;
+  align-items: center;
+  background: #F7F7F8;
+  border-radius: 5px;
+  box-shadow:  0px 2px 5px rgba(0,0,0,0.2);
 }
 
-.card span {
+.card:last-of-type {
+  margin-bottom: 10px;
+}
+
+.card button {
+  background: transparent;
+  border-radius: 5px;
+}
+
+.card p {
   flex-grow: 1;
+  margin: 0px;
+  padding: 10px;
 }

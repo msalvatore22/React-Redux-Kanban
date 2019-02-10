@@ -27,9 +27,7 @@ class App extends Component {
   render() {
     if(!this.props.columns) return null
     return (
-      <div>
-        <button onClick={()=> this.handleAddColumn()}>add column</button>
-        <div className="App">
+      <div className="App">
         {this.props.columns.map((column, columnIndex) => (
           <Column
             length={this.props.columns.length} 
@@ -45,14 +43,14 @@ class App extends Component {
             onEditColumn={(name) => this.props.editColumn(columnIndex, name)}
           />
         ))}
-        </div>
+        <button className="add-column-btn" onClick={()=> this.handleAddColumn()}>add column</button>
       </div>
     );
   }
 }
 
 function mapStateToProps(state){
-  return state.boards
+  return state.columns
 }
 
 const mapDispatchToProps = (dispatch) => ({

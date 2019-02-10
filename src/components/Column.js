@@ -53,6 +53,7 @@ render(){
   const {showInput, newName} = this.state
   return (
     <div className="column">
+      {showInput ? null : <button className="remove-column-btn" onClick={onRemove}>x</button>}
       {showInput ?
         <form onSubmit={this.handleSubmit} ref={node => {this.node = node}}>
           <input 
@@ -63,9 +64,8 @@ render(){
             onChange={this.handleChange}
           />
         </form>
-      : <h1 onClick={this.toggleInput}>{column.name}</h1>
+      : <p onClick={this.toggleInput}>{column.name}</p>
       }
-      {showInput ? null : <button onClick={onRemove}>delete column</button>}
       {column.cards.map((card, cardIndex) => (
         <Card 
           key={cardIndex}
@@ -79,7 +79,7 @@ render(){
           onEditCard={(name) => onEditCard(cardIndex, name)}
         />
       ))}
-      <button onClick={onAddCard}>+ add card</button>
+      <button className="add-card-btn" onClick={onAddCard}>+ add card</button>
     </div> 
   )}
 }

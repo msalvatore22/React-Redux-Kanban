@@ -63,6 +63,7 @@ export default (state = {}, action) => {
       return { ...state, columns}
     }
     case actions.MOVE_CARD: {
+      deepFreeze(state)
       const { columnIndex, cardIndex, direction } = action
       // clone columns parent array
       const columns = [...state.columns]

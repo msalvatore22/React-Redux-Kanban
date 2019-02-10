@@ -48,9 +48,12 @@ class Card extends Component {
     } = this.props
     const {showInput, newName} = this.state
     return (
-      <div className="card-container">
+      <div>
+      <div className="delete-btn-container">
+        {showInput ? null : <button className="delete-card-btn" onClick={onDelete}>x</button>}
+      </div>
         <div className="card">
-          {canMoveLeft && <button onClick={onMoveLeft}>{'<'}</button>}
+          {showInput ? null : canMoveLeft && <button onClick={onMoveLeft}>{'<'}</button>}
             {showInput ?
             <form onSubmit={this.handleSubmit} ref={node => {this.node = node}}>
               <input 
@@ -61,14 +64,11 @@ class Card extends Component {
                 onChange={this.handleChange}
               />
             </form>
-            : <span onClick={this.toggleInput}>{card.name}</span>
+            : <p onClick={this.toggleInput}>{card.name}</p>
             }
-          {canMoveRight && <button onClick={onMoveRight}>{'>'}</button>}
+          {showInput ? null : canMoveRight && <button onClick={onMoveRight}>{'>'}</button>}
         </div>
-        <div>
-          {showInput ? null : <button onClick={onDelete}>delete card</button>}
-        </div>
-      </div>
+       </div>
   )}
 }
 
