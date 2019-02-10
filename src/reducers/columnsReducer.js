@@ -73,7 +73,7 @@ export default (state = {}, action) => {
         cards: [...columns[columnIndex].cards]
       }
       columns[columnIndex + direction] = {
-        ...columns[columnIndex],
+        ...columns[columnIndex + direction],
         cards: [...columns[columnIndex + direction].cards]
       }
       // splice out of the sub array
