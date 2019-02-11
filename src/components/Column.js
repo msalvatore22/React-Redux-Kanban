@@ -12,6 +12,7 @@ class Column extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     let { newName } = this.state
+    if(newName.length == 0) return
     const {onEditColumn} = this.props
     const name = {name: newName}
     onEditColumn(name)
@@ -53,7 +54,7 @@ render(){
   const {showInput, newName} = this.state
   return (
     <div className="column">
-      {showInput ? null : <button className="remove-column-btn" onClick={onRemove}>x</button>}
+      {showInput ? <button disabled="true" className="remove-column-btn">x</button> : <button className="remove-column-btn" onClick={onRemove}>x</button>}
       {showInput ?
         <form onSubmit={this.handleSubmit} ref={node => {this.node = node}}>
           <input 

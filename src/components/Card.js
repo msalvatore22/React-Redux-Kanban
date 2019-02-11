@@ -11,6 +11,7 @@ class Card extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     let { newName } = this.state
+    if(newName.length == 0) return
     const {onEditCard} = this.props
     const name = {name: newName}
     onEditCard(name)
@@ -50,10 +51,10 @@ class Card extends Component {
     return (
       <div>
       <div className="delete-btn-container">
-        {showInput ? null : <button className="delete-card-btn" onClick={onDelete}>x</button>}
+        {showInput ? <button className="delete-card-btn" disabled="true">x</button> : <button className="delete-card-btn" onClick={onDelete}>x</button>}
       </div>
         <div className="card">
-          {showInput ? null : canMoveLeft && <button onClick={onMoveLeft}>{'<'}</button>}
+          {showInput ? canMoveLeft && <button disabled="true">{'<'}</button> : canMoveLeft && <button onClick={onMoveLeft}>{'<'}</button>}
             {showInput ?
             <form onSubmit={this.handleSubmit} ref={node => {this.node = node}}>
               <input 
@@ -66,7 +67,7 @@ class Card extends Component {
             </form>
             : <p onClick={this.toggleInput}>{card.name}</p>
             }
-          {showInput ? null : canMoveRight && <button onClick={onMoveRight}>{'>'}</button>}
+          {showInput ? canMoveRight && <button disabled="true">{'>'}</button> : canMoveRight && <button onClick={onMoveRight}>{'>'}</button>}
         </div>
        </div>
   )}

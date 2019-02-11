@@ -9,19 +9,19 @@ export default (state = {}, action) => {
         {
           name: 'To Do',
           cards: [
-            {name: 'Card A'}
+            {name: 'Task One'}
           ]
         },
         {
           name: 'Doing',
           cards: [
-            {name: 'Card B'}
+            {name: 'Task Two'}
           ]
         },
         {
           name: 'Done',
           cards: [
-            {name: 'Card C'}
+            {name: 'Task Three'}
           ]
         }
       ]
