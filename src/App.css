@@ -63,8 +63,19 @@ button:disabled {
   padding: 2px 4px;
 }
 
+.add-column-form input {
+  font-size: 16px;
+  padding: 5px;
+  margin: 4px;
+  border-radius: 5px;
+  border: 1px solid #dddd
+}
+
 .column input {
   font-size: 16px;
+  padding: 1px 5px;
+  border-radius: 5px;
+  border: 1px solid #dddd
 }
 
 .remove-column-btn {
@@ -143,11 +154,49 @@ button:disabled {
 
 .card form input {
   font-size: 16px;
-  padding: 2px 0;
-  margin: 6px 5px;
+  padding: 5px;
+  margin: 4px;
+  border-radius: 5px;
+  border: 1px solid #dddd
 }
 
 .card p {
   margin: 0px;
   padding: 10px;
+}
+
+.add-card-form input {
+  width: 96%;
+  padding: 5px;
+  margin: 24px 0 4px 0;
+  border-radius: 5px;
+  border: 1px solid #dddd
+}
+
+.form-btn {
+  border: none;
+  margin: 5px 7px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: #F7F7F8;
+}
+
+.submit-btn {
+  color: #02c802;
+  border: 1px solid #02c802;
+}
+
+.submit-btn:hover {
+  background: #02c802;
+  color: #F7F7F8
+}
+
+.cancel-btn {
+  color: red;
+  border: 1px solid red;
+}
+
+.cancel-btn:hover {
+  background: red;
+  color: #F7F7F8;
 }

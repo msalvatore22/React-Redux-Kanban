@@ -6,8 +6,10 @@ class Column extends Component {
     super(props)
 
     this.state = {
-      newName: "",
-      showInput: false
+      newColumnName: "",
+      newCardName: "",
+      showInput: false,
+      showCardInput: false
     }
   }
 
@@ -15,16 +17,27 @@ class Column extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault()
-    let { newName } = this.state
-    if(newName.length === 0) return
+    let { newColumnName } = this.state
+    if(newColumnName.length === 0) return
     const {onEditColumn} = this.props
-    const name = {name: newName}
+    const name = {name: newColumnName}
     onEditColumn(name)
     this.clearInput()
     this.toggleInput()
   }
 
-  clearInput = () => this.setState({newName: ''})
+  handleCardSubmit = (e) => {
+    e.preventDefault()
+    let { newCardName } = this.state
+    if(newCardName.length === 0) return
+    const {onAddCard} = this.props
+    const name = { name: newCardName }
+    onAddCard(name)
+    this.clearInput()
+    this.toggleCardInput()
+  }
+
+  clearInput = () => this.setState({newColumnName: '', newCardName: ''})
   
   toggleInput = () => {
     if(!this.state.showInput){
@@ -44,6 +57,11 @@ class Column extends Component {
     this.toggleInput();
   }
 
+  toggleCardInput = () => {
+    this.setState(prevState => ({
+      showCardInput: !prevState.showCardInput}))
+  }
+
 
 render(){
   const { column, 
@@ -55,7 +73,7 @@ render(){
     onEditCard, 
     length,
     onRemove } = this.props
-  const {showInput, newName} = this.state
+  const {showInput, showCardInput, newColumnName, newCardName} = this.state
   return (
     <div className="column">
       {showInput ? <button disabled="true" className="remove-column-btn">x</button> : <button className="remove-column-btn" onClick={onRemove}>x</button>}
@@ -63,8 +81,8 @@ render(){
         <form onSubmit={this.handleSubmit} ref={node => {this.node = node}}>
           <input 
             type="text"
-            name="newName"
-            value={newName}
+            name="newColumnName"
+            value={newColumnName}
             placeholder={column.name}
             onChange={this.handleChange}
           />
@@ -82,9 +100,24 @@ render(){
           onMoveRight={() => onMoveRight(cardIndex)}
           onDelete={()=> onDelete(cardIndex)}
           onEditCard={(name) => onEditCard(cardIndex, name)}
+          onAddCard={(name) => onAddCard(name)}
         />
       ))}
-      <button className="add-card-btn" onClick={onAddCard}>+ add card</button>
+      {showCardInput ?
+      <form className="add-card-form" onSubmit={this.handleCardSubmit}>
+          <input 
+            type="text"
+            name="newCardName"
+            value={newCardName}
+            placeholder="Enter Card Title"
+            onChange={this.handleChange}
+          />
+          <button className="submit-btn form-btn" type="submit">add card</button>
+          <button className="cancel-btn form-btn" onClick={this.toggleCardInput}>cancel</button>
+        </form>
+      :
+      <button className="add-card-btn" onClick={this.toggleCardInput}>+ add card</button>
+      }
     </div> 
   )}
 }

@@ -29,15 +29,13 @@ class App extends Component {
     const name = newName
     this.handleAddColumn(name)
     this.clearInput()
+    this.toggleInput()
   }
 
   clearInput = () => this.setState({newName: ''})
 
-  handleAdd = columnIndex => {
-    const name = window.prompt('Name?')
-    if(!name) return
-    const card = { name }
-    this.props.addCard(columnIndex, card)
+  handleAdd = (columnIndex, name) => {
+    this.props.addCard(columnIndex, name)
   }
 
   handleAddColumn = (name) => {
@@ -66,7 +64,7 @@ class App extends Component {
               key={columnIndex}
               onMoveLeft={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_LEFT)}
               onMoveRight={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_RIGHT)}
-              onAddCard={() => this.handleAdd(columnIndex)}
+              onAddCard={(name) => this.handleAdd(columnIndex, name)}
               onDelete={cardIndex => this.props.deleteCard(cardIndex,columnIndex)}
               onEditCard={(cardIndex, name) => this.props.editCard(cardIndex, columnIndex, name)}
               onRemove={() => this.props.removeColumn(columnIndex)}
@@ -74,7 +72,7 @@ class App extends Component {
             />
           ))}
           {showInput ?
-          <form onSubmit={this.handleSubmit}>
+          <form className="add-column-form" onSubmit={this.handleSubmit}>
             <input 
               type="text"
               name="newName"
@@ -82,8 +80,8 @@ class App extends Component {
               placeholder="Enter Column Title"
               onChange={this.handleChange}
             />
-            <button type="submit">submit</button>
-            <button onClick={this.toggleInput}>cancel</button>
+            <button className="submit-btn form-btn" type="submit">submit</button>
+            <button className="cancel-btn form-btn" onClick={this.toggleInput}>cancel</button>
           </form>
           : <button className="add-column-btn" onClick={this.toggleInput}>add column</button>
           }
