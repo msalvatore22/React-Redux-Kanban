@@ -9,7 +9,29 @@ const DIRECTION_LEFT = -1
 const DIRECTION_RIGHT = 1
 
 class App extends Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      newName: "",
+      showInput: false
+    }
+  }
+
   componentDidMount = () => this.props.load()
+
+  handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    let { newName } = this.state
+    if(newName.length === 0) return
+    const name = newName
+    this.handleAddColumn(name)
+    this.clearInput()
+  }
+
+  clearInput = () => this.setState({newName: ''})
 
   handleAdd = columnIndex => {
     const name = window.prompt('Name?')
@@ -18,14 +40,19 @@ class App extends Component {
     this.props.addCard(columnIndex, card)
   }
 
-  handleAddColumn = () => {
-    const name = window.prompt('Name?')
-    if(!name) return
+  handleAddColumn = (name) => {
     const column = { name, cards: [] }
     this.props.addColumn(column)
   }
 
+  toggleInput = () => {
+    this.setState(prevState => ({
+      showInput: !prevState.showInput})
+    )
+  }
+
   render() {
+    const { newName, showInput } = this.state
     if(!this.props.columns) return null
     return (
       <div>
@@ -46,7 +73,20 @@ class App extends Component {
               onEditColumn={(name) => this.props.editColumn(columnIndex, name)}
             />
           ))}
-          <button className="add-column-btn" onClick={()=> this.handleAddColumn()}>add column</button>
+          {showInput ?
+          <form onSubmit={this.handleSubmit}>
+            <input 
+              type="text"
+              name="newName"
+              value={newName}
+              placeholder="Enter Column Title"
+              onChange={this.handleChange}
+            />
+            <button type="submit">submit</button>
+            <button onClick={this.toggleInput}>cancel</button>
+          </form>
+          : <button className="add-column-btn" onClick={this.toggleInput}>add column</button>
+          }
         </div>
       </div>
     );

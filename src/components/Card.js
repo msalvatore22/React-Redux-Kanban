@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
 class Card extends Component {
-  state = {
-    newName: "",
-    showInput: false
+  constructor(props){
+    super(props)
+
+    this.state = {
+      newName: "",
+      showInput: false
+    }
   }
 
   handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
