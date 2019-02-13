@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD, ADD_COLUMN, EDIT_CARD, REMOVE_COLUMN, EDIT_COLUMN} from '../actions'
 import Column from './Column'
+import Header from './Header'
 import '../App.css';
 
 const DIRECTION_LEFT = -1
@@ -27,23 +28,26 @@ class App extends Component {
   render() {
     if(!this.props.columns) return null
     return (
-      <div className="App">
-        {this.props.columns.map((column, columnIndex) => (
-          <Column
-            length={this.props.columns.length} 
-            column={column} 
-            columnIndex={columnIndex} 
-            key={columnIndex}
-            onMoveLeft={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_LEFT)}
-            onMoveRight={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_RIGHT)}
-            onAddCard={() => this.handleAdd(columnIndex)}
-            onDelete={cardIndex => this.props.deleteCard(cardIndex,columnIndex)}
-            onEditCard={(cardIndex, name) => this.props.editCard(cardIndex, columnIndex, name)}
-            onRemove={() => this.props.removeColumn(columnIndex)}
-            onEditColumn={(name) => this.props.editColumn(columnIndex, name)}
-          />
-        ))}
-        <button className="add-column-btn" onClick={()=> this.handleAddColumn()}>add column</button>
+      <div>
+        <Header />
+        <div className="App">
+          {this.props.columns.map((column, columnIndex) => (
+            <Column
+              length={this.props.columns.length} 
+              column={column} 
+              columnIndex={columnIndex} 
+              key={columnIndex}
+              onMoveLeft={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_LEFT)}
+              onMoveRight={cardIndex => this.props.moveCard(columnIndex, cardIndex, DIRECTION_RIGHT)}
+              onAddCard={() => this.handleAdd(columnIndex)}
+              onDelete={cardIndex => this.props.deleteCard(cardIndex,columnIndex)}
+              onEditCard={(cardIndex, name) => this.props.editCard(cardIndex, columnIndex, name)}
+              onRemove={() => this.props.removeColumn(columnIndex)}
+              onEditColumn={(name) => this.props.editColumn(columnIndex, name)}
+            />
+          ))}
+          <button className="add-column-btn" onClick={()=> this.handleAddColumn()}>add column</button>
+        </div>
       </div>
     );
   }

@@ -12,7 +12,7 @@ class Column extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     let { newName } = this.state
-    if(newName.length == 0) return
+    if(newName.length === 0) return
     const {onEditColumn} = this.props
     const name = {name: newName}
     onEditColumn(name)

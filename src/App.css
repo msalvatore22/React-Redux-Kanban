@@ -29,6 +29,13 @@ button:disabled {
   background: rgba(204, 204, 204, 0.5); 
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  background: rgb(221, 221, 221);
+  margin-bottom: 10px;
+}
+
 .column {
   width: 300px;
   padding: 10px;
@@ -51,6 +58,13 @@ button:disabled {
 .add-column-btn {
   height: 0%;
   width: 100px;
+  border: none;
+  border-radius: 10px;
+  padding: 2px 4px;
+}
+
+.column input {
+  font-size: 16px;
 }
 
 .remove-column-btn {
@@ -61,9 +75,22 @@ button:disabled {
   color: red;
 }
 
+.remove-column-btn:hover {
+  background: red;
+  color: #F0EFF1;
+}
+
 .add-card-btn {
   position: absolute;
   bottom: 10px;
+  border: none;
+  width: 94%;
+  background: transparent;
+  padding: 4px 0;
+}
+
+.add-card-btn:hover {
+  background: #DDDDDD;
 }
 
 .column:first-child {
@@ -115,9 +142,9 @@ button:disabled {
 }
 
 .card form input {
-  font-size: 18px;
-  margin: 6px 0;
-  color: red;
+  font-size: 16px;
+  padding: 2px 0;
+  margin: 6px 5px;
 }
 
 .card p {

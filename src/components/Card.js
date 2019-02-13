@@ -11,7 +11,7 @@ class Card extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     let { newName } = this.state
-    if(newName.length == 0) return
+    if(newName.length === 0) return
     const {onEditCard} = this.props
     const name = {name: newName}
     onEditCard(name)
