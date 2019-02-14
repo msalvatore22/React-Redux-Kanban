@@ -13,6 +13,7 @@ button:disabled {
 .App {
   display: inline-flex;
   margin-right: 10px;
+  margin-top: 70px;
 }
 
 ::-webkit-scrollbar {
@@ -30,8 +31,10 @@ button:disabled {
 }
 
 .header {
-  display: flex;
-  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
   background: rgb(221, 221, 221);
   margin-bottom: 10px;
 }
@@ -93,9 +96,10 @@ button:disabled {
 
 .add-card-btn {
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   border: none;
   width: 94%;
+  border-radius: 3px;
   background: transparent;
   padding: 4px 0;
 }
@@ -141,6 +145,7 @@ button:disabled {
   background: #F7F7F8;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+  padding: 0 4px;
 }
 
 .card:last-of-type {
@@ -149,6 +154,7 @@ button:disabled {
 
 .card button {
   background: transparent;
+  border: 2px solid #dddd;
   border-radius: 5px;
 }
 
