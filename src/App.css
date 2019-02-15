@@ -12,6 +12,7 @@ button:disabled {
 
 .App {
   display: inline-flex;
+  margin-right: 20px;
 }
 
 .reset-btns {
