@@ -112,11 +112,11 @@ render(){
             placeholder="Enter Card Title"
             onChange={this.handleChange}
           />
-          <button className="submit-btn form-btn" type="submit">add card</button>
-          <button className="cancel-btn form-btn" onClick={this.toggleCardInput}>cancel</button>
+          <button className="submit-btn form-btn" type="submit">Add Card</button>
+          <button className="cancel-btn form-btn" onClick={this.toggleCardInput}>Cancel</button>
         </form>
       :
-      <button className="add-card-btn" onClick={this.toggleCardInput}>+ add card</button>
+      <button className="add-card-btn" onClick={this.toggleCardInput}>+ Add Card</button>
       }
     </div> 
   )}

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { ADD_CARD, MOVE_CARD, CLEAR, LOAD, DELETE_CARD, ADD_COLUMN, EDIT_CARD, REMOVE_COLUMN, EDIT_COLUMN} from '../actions'
 import Column from './Column'
+import UndoRedo from './UndoRedo'
+import Header from './Header'
 import '../App.css';
 
 const DIRECTION_LEFT = -1
@@ -58,12 +60,14 @@ class App extends Component {
     const { newName, showInput } = this.state
     if(!this.props.columns) return null
     return (
-      <div>
+      <div className="App">
+        <Header />
         <div className="reset-btns">
-          <button onClick={this.handleLoad}>load boilerplate project</button>
-          <button onClick={this.handleClear}>clear project</button>
+          <button className="load-btn" onClick={this.handleLoad}>Load Starter Board</button>
+          <button className="clear-btn" onClick={this.handleClear}>Clear Board</button>
+          <UndoRedo />
         </div>
-        <div className="App">
+        <div className="column-row">
           {this.props.columns.map((column, columnIndex) => (
             <Column
               length={this.props.columns.length} 
@@ -88,10 +92,10 @@ class App extends Component {
               placeholder="Enter Column Title"
               onChange={this.handleChange}
             />
-            <button className="submit-btn form-btn" type="submit">submit</button>
-            <button className="cancel-btn form-btn" onClick={this.toggleInput}>cancel</button>
+            <button className="submit-btn form-btn" type="submit">Add Column</button>
+            <button className="cancel-btn form-btn" onClick={this.toggleInput}>Cancel</button>
           </form>
-          : <button className="add-column-btn" onClick={this.toggleInput}>add column</button>
+          : <button className="add-column-btn" onClick={this.toggleInput}>Add Column</button>
           }
         </div>
       </div>
@@ -100,7 +104,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state){
-  return state.columns
+  return state.columns.present
 }
 
 const mapDispatchToProps = (dispatch) => ({

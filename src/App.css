@@ -1,42 +1,64 @@
-.body {
+body {
   overflow-x: scroll;
+}
+
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+html {
+  background: #006792;
 }
 
 button {
   cursor: pointer;
+  background: #F0EFF1
+}
+
+button:focus {
+  outline: none;
 }
 
 button:disabled {
   color: grey;
 }
 
-.App {
+.column-row {
   display: inline-flex;
   margin-right: 20px;
+  margin-bottom: 40px;
 }
 
 .reset-btns {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 80px;
 }
 
 .reset-btns button:first-child {
   margin: 0 10px;
 }
 
-.reset-btns button:first-child:hover {
-  background: yellow;
-}
-
-.reset-btns button:last-child:hover {
-  background: red;
-  color: #dddddd
-}
-
 .reset-btns button {
   border: none;
-  border-radius: 6px;
-  padding: 5px 10px;
+  border-radius: 3px;
+  padding: 10px 15px;
+}
+
+.load-btn:hover {
+  background: #E6F14A;
+}
+
+.clear-btn:hover {
+  background: #EF233C;
+}
+
+.undo-btn:hover {
+  background: #0BC9CD;
+}
+
+.redo-btn:hover {
+  background: #B4ADEA;
 }
 
 ::-webkit-scrollbar {
@@ -58,8 +80,9 @@ button:disabled {
   top: 0;
   width: 100%;
   text-align: center;
-  background: rgb(221, 221, 221);
+  background: #00557a9c;
   margin-bottom: 10px;
+  color: #F0EFF1;
 }
 
 .column {
@@ -69,7 +92,7 @@ button:disabled {
   padding-top: 0;
   margin: 0px 5px;
   background: #F0EFF1;
-  border-radius: 5px;
+  border-radius: 6px;
   position: relative;
   height: 0%;
   flex: 0 0 auto;
@@ -78,30 +101,35 @@ button:disabled {
 
 .column p {
   margin: 2px;
+  padding-bottom: 4px;
   cursor: pointer;
+  border-bottom: 1px solid #ddd
 }
 
 .add-column-btn {
   height: 0%;
   width: 100px;
   border: none;
-  border-radius: 6px;
+  border-radius: 3px;
   padding: 4px 8px;
-  margin-left: 10px;
+}
+
+.add-column-btn:hover {
+  background: #FA8334
 }
 
 .add-column-form input {
   font-size: 16px;
   padding: 5px;
-  margin: 4px;
-  border-radius: 5px;
+  margin: 0 8px 0 0px;
+  border-radius: 3px;
   border: 1px solid #dddd
 }
 
 .column input {
   font-size: 16px;
-  padding: 1px 5px;
-  border-radius: 5px;
+  padding: 4px 5px;
+  border-radius: 3px;
   border: 1px solid #dddd
 }
 
@@ -155,6 +183,7 @@ button:disabled {
   border: none;
   color: red;
   border-radius: 2px;
+  margin-top: 4px;
 }
 
 .delete-card-btn:hover {
@@ -167,7 +196,7 @@ button:disabled {
   align-items: center;
   justify-content: space-between;
   background: #F7F7F8;
-  border-radius: 5px;
+  border-radius: 6px;
   box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
   padding: 0 4px;
 }
@@ -179,14 +208,14 @@ button:disabled {
 .card button {
   background: transparent;
   border: 2px solid #dddd;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .card form input {
   font-size: 16px;
   padding: 5px;
   margin: 4px;
-  border-radius: 5px;
+  border-radius: 3px;
   border: 1px solid #dddd
 }
 
@@ -198,14 +227,13 @@ button:disabled {
 .add-card-form input {
   width: 96%;
   padding: 5px;
-  margin: 24px 0 4px 0;
-  border-radius: 5px;
+  margin: 10px 0 10px 0;
+  border-radius: 3px;
   border: 1px solid #dddd
 }
 
 .form-btn {
   border: none;
-  margin: 5px 7px;
   padding: 4px 8px;
   border-radius: 3px;
   background: #F7F7F8;
@@ -224,6 +252,7 @@ button:disabled {
 .cancel-btn {
   color: red;
   border: 1px solid red;
+  margin-left: 8px;
 }
 
 .cancel-btn:hover {

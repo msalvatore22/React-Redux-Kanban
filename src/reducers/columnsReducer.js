@@ -1,5 +1,6 @@
 import * as actions from '../actions'
 import deepFreeze from 'deep-freeze'
+import undoable, { distinctState } from 'redux-undo'
 
 const initialState = {
   columns: [
@@ -24,7 +25,7 @@ const initialState = {
   ]
 };
 
-export default (state = initialState, action) => {
+const columns = (state = initialState, action) => {
   switch(action.type) {
     case actions.CLEAR:
     return {
@@ -69,7 +70,6 @@ export default (state = initialState, action) => {
       return { ...state, columns}
     }
     case actions.MOVE_CARD: {
-      deepFreeze(state)
       const { columnIndex, cardIndex, direction } = action
       // clone columns parent array
       const columns = [...state.columns]
@@ -116,3 +116,9 @@ export default (state = initialState, action) => {
       return state
   }
 }
+
+const undoableColumns = undoable(columns, {
+  filter: distinctState()
+})
+
+export default undoableColumns;
