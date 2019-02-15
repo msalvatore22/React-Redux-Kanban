@@ -99,6 +99,18 @@ button:disabled {
   word-break: break-all;
 }
 
+.column:first-child {
+  margin-left: 10px;
+}
+
+.column:last-of-type {
+  margin-right: 0px;
+}
+
+.column:last-of-type .card {
+  justify-content: flex-start;
+}
+
 .column p {
   margin: 2px;
   padding-bottom: 4px;
@@ -159,18 +171,6 @@ button:disabled {
 
 .add-card-btn:hover {
   background: #DDDDDD;
-}
-
-.column:first-child {
-  margin-left: 10px;
-}
-
-.column:last-of-type {
-  margin-right: 10px;
-}
-
-.column:last-of-type .card {
-  justify-content: flex-start;
 }
 
 .delete-btn-container {
