@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { ADD_CARD, MOVE_CARD, LOAD, DELETE_CARD, ADD_COLUMN, EDIT_CARD, REMOVE_COLUMN, EDIT_COLUMN} from '../actions'
+import { ADD_CARD, MOVE_CARD, CLEAR, LOAD, DELETE_CARD, ADD_COLUMN, EDIT_CARD, REMOVE_COLUMN, EDIT_COLUMN} from '../actions'
 import Column from './Column'
-import Header from './Header'
 import '../App.css';
 
 const DIRECTION_LEFT = -1
@@ -17,8 +16,6 @@ class App extends Component {
       showInput: false
     }
   }
-
-  componentDidMount = () => this.props.load()
 
   handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
 
@@ -49,12 +46,23 @@ class App extends Component {
     )
   }
 
+  handleClear = () => {
+    this.props.clear()
+  }
+
+  handleLoad = () => {
+    this.props.load()
+  }
+
   render() {
     const { newName, showInput } = this.state
     if(!this.props.columns) return null
     return (
       <div>
-        <Header />
+        <div className="reset-btns">
+          <button onClick={this.handleLoad}>load boilerplate project</button>
+          <button onClick={this.handleClear}>clear project</button>
+        </div>
         <div className="App">
           {this.props.columns.map((column, columnIndex) => (
             <Column
@@ -98,6 +106,7 @@ function mapStateToProps(state){
 const mapDispatchToProps = (dispatch) => ({
   addCard: (columnIndex, card) => dispatch({type: ADD_CARD, columnIndex, card}),
   moveCard: (columnIndex, cardIndex, direction) => dispatch({type: MOVE_CARD, columnIndex, cardIndex, direction}),
+  clear: () => dispatch({type: CLEAR}),
   load: () => dispatch({type: LOAD}),
   deleteCard: (cardIndex, columnIndex) => dispatch({type: DELETE_CARD, cardIndex, columnIndex}),
   addColumn: (column) => dispatch({type: ADD_COLUMN, column}),

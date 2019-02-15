@@ -1,5 +1,6 @@
 export const ADD_CARD = "ADD_CARD"
 export const MOVE_CARD = "MOVE_CARD"
+export const CLEAR = "CLEAR"
 export const LOAD = "LOAD"
 export const DELETE_CARD = "DELETE_CARD"
 export const ADD_COLUMN = "ADD_COLUMN"

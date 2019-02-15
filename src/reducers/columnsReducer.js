@@ -1,31 +1,37 @@
 import * as actions from '../actions'
 import deepFreeze from 'deep-freeze'
 
-export default (state = {}, action) => {
-  switch(action.type) {
-    case actions.LOAD:
-    return {
-      columns: [
-        {
-          name: 'To Do',
-          cards: [
-            {name: 'Task One'}
-          ]
-        },
-        {
-          name: 'Doing',
-          cards: [
-            {name: 'Task Two'}
-          ]
-        },
-        {
-          name: 'Done',
-          cards: [
-            {name: 'Task Three'}
-          ]
-        }
+const initialState = {
+  columns: [
+    {
+      name: 'To Do',
+      cards: [
+        {name: 'Task One'}
       ]
-    };
+    },
+    {
+      name: 'Doing',
+      cards: [
+        {name: 'Task Two'}
+      ]
+    },
+    {
+      name: 'Done',
+      cards: [
+        {name: 'Task Three'}
+      ]
+    }
+  ]
+};
+
+export default (state = initialState, action) => {
+  switch(action.type) {
+    case actions.CLEAR:
+    return {
+      columns: []
+    }
+    case actions.LOAD:
+    return initialState
     case actions.ADD_COLUMN: {
       const { column } = action
       const columns = [...state.columns]

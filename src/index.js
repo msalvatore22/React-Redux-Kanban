@@ -7,10 +7,18 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from './reducers';
+import { loadState, saveState } from './localStorage';
 
-const store = createStore(reducers, composeWithDevTools(
+const persistedState = loadState()
+const store = createStore(reducers, persistedState, composeWithDevTools(
 
 ))
+
+store.subscribe(() => {
+  saveState({
+    columns: store.getState().columns
+  })
+})
 
 ReactDOM.render(
   <Provider store={store}>
