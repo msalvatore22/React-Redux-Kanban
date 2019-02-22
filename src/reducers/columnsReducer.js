@@ -1,6 +1,5 @@
 import * as actions from '../actions'
 import deepFreeze from 'deep-freeze'
-import undoable, { distinctState } from 'redux-undo'
 
 const initialState = {
   columns: [
@@ -25,7 +24,7 @@ const initialState = {
   ]
 };
 
-const columns = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch(action.type) {
     case actions.CLEAR:
     return {
@@ -117,8 +116,3 @@ const columns = (state = initialState, action) => {
   }
 }
 
-const undoableColumns = undoable(columns, {
-  filter: distinctState()
-})
-
-export default undoableColumns;
