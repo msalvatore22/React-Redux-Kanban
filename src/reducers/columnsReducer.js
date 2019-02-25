@@ -108,7 +108,7 @@ export default (state = initialState, action) => {
         cards: [...columns[columnIndex].cards]
       }
       columns[columnIndex].cards.splice(cardIndex, 1)
-      columns[columnIndex].cards.push(name)
+      columns[columnIndex].cards.splice(cardIndex, 0, name)
       return {...state, columns}
     }
     default:
