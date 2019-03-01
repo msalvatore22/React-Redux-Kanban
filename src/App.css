@@ -131,6 +131,10 @@ button:disabled {
   background: #FA8334
 }
 
+.add-column-form {
+  width: 360px;
+}
+
 .add-column-form input {
   font-size: 16px;
   padding: 5px;
