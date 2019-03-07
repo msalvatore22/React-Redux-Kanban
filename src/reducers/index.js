@@ -3,7 +3,7 @@ import ColumnsReducer from './columnsReducer';
 import undoable from 'redux-undo'
 
 const rootReducer = combineReducers({
-  columns: undoable(ColumnsReducer)
+  columns: ColumnsReducer
 })
 
 export default rootReducer;

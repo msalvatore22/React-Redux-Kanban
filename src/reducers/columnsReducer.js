@@ -2,26 +2,43 @@ import * as actions from '../actions'
 import deepFreeze from 'deep-freeze'
 
 const initialState = {
-  columns: [
-    {
-      name: 'To Do',
-      cards: [
-        {name: 'Task One'}
-      ]
+  columns: {
+    byId: {
+      "column1" : {
+        id: "column1",
+        name: "Todo",
+        cards: ["card1"]
+      },
+      "column2": {
+        id: "column2",
+        name: "Doing",
+        cards: ["card2"]
+      },
+      "column3": {
+        id: "column3",
+        name: "Done",
+        cards: ['card3']
+      }
     },
-    {
-      name: 'Doing',
-      cards: [
-        {name: 'Task Two'}
-      ]
-    },
-    {
-      name: 'Done',
-      cards: [
-        {name: 'Task Three'}
-      ]
+    allIds: ["column1", "column2", "column3"]
+  },
+  cards: {
+    byId: {
+      "card1": {
+        id: "card1",
+        name: "Task 1"
+      },
+      "card2": {
+        id: "card2",
+        name: "Task 2"
+      },
+      "card3": {
+        id: "card3",
+        name: "Task 3"
+      }
     }
-  ]
+  },
+  allIds: ["card1", "card2", 'card3']
 };
 
 export default (state = initialState, action) => {

@@ -12,15 +12,15 @@ import throttle from 'lodash/throttle'
 
 
 const persistedState = loadState()
-const store = createStore(reducers, persistedState, composeWithDevTools(
+const store = createStore(reducers, composeWithDevTools(
 
 ))
 
-store.subscribe(throttle(() => {
-  saveState({
-    columns: store.getState().columns
-  })
-}, 1000));
+// store.subscribe(throttle(() => {
+//   saveState({
+//     columns: store.getState().columns
+//   })
+// }, 1000));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -104,7 +104,7 @@ class App extends Component {
 }
 
 function mapStateToProps({columns}){
-  return columns.present
+  return columns
 }
 
 const mapDispatchToProps = (dispatch) => ({
