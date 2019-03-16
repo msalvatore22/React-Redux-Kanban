@@ -28,7 +28,6 @@ class EditCardForm extends Component {
     const {card} = this.props
     const {newName} = this.state
     return (
-      <div>
         <form onSubmit={this.handleSubmit}>
           <input 
             type="text"
@@ -38,7 +37,6 @@ class EditCardForm extends Component {
             onChange={this.handleChange}
           />
         </form>
-      </div>
     )
   }
 }

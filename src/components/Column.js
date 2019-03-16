@@ -1,30 +1,17 @@
 import React, { Component } from 'react';
 import Card from './Card'
 import AddCardForm from './AddCardForm'
+import EditColumnForm from './EditColumnForm'
 
 class Column extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      newColumnName: "",
       showInput: false,
       showCardInput: false
     }
   }
-  
-  handleSubmit = (e) => {
-    e.preventDefault()
-    let { newColumnName } = this.state
-    if(newColumnName.length === 0) return
-    const {onEditColumn} = this.props
-    const name = {name: newColumnName}
-    onEditColumn(name)
-    this.clearInput()
-    this.toggleInput()
-  }
-
-  clearInput = () => this.setState({newColumnName: '', newCardName: ''})
   
   toggleInput = () => {
     if(!this.state.showInput){
@@ -57,23 +44,18 @@ render(){
     onMoveRight, 
     onAddCard, 
     onDelete,
-    onEditCard, 
+    onEditCard,
+    onEditColumn,
     length,
     onRemove } = this.props
-  const {showInput, showCardInput, newColumnName} = this.state
+  const {showInput, showCardInput} = this.state
   return (
     <div className="column">
       {showInput ? <button disabled="true" className="remove-column-btn">x</button> : <button className="remove-column-btn" onClick={onRemove}>x</button>}
       {showInput ?
-        <form onSubmit={this.handleSubmit} ref={node => {this.node = node}}>
-          <input 
-            type="text"
-            name="newColumnName"
-            value={newColumnName}
-            placeholder={column.name}
-            onChange={this.handleChange}
-          />
-        </form>
+        <div ref={node => {this.node = node}}>
+          <EditColumnForm column={column} toggleInput={this.toggleInput} onEditColumn={name => onEditColumn(name)}/>
+        </div>
       : <p onClick={this.toggleInput}>{column.name}</p>
       }
       {column.cards.map((card, cardIndex) => (

@@ -4,6 +4,7 @@ import { ADD_CARD, MOVE_CARD, CLEAR, LOAD, DELETE_CARD, ADD_COLUMN, EDIT_CARD, R
 import Column from './Column'
 import UndoRedo from './UndoRedo'
 import Header from './Header'
+import AddColumnForm from './AddColumnForm'
 import '../App.css';
 
 const DIRECTION_LEFT = -1
@@ -14,24 +15,9 @@ class App extends Component {
     super(props)
 
     this.state = {
-      newName: "",
       showInput: false
     }
   }
-
-  handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    let { newName } = this.state
-    if(newName.length === 0) return
-    const name = newName
-    this.handleAddColumn(name)
-    this.clearInput()
-    this.toggleInput()
-  }
-
-  clearInput = () => this.setState({newName: ''})
 
   handleAdd = (columnIndex, name) => {
     this.props.addCard(columnIndex, name)
@@ -57,7 +43,7 @@ class App extends Component {
   }
 
   render() {
-    const { newName, showInput } = this.state
+    const { showInput } = this.state
     if(!this.props.columns) return null
     return (
       <div className="App">
@@ -84,17 +70,7 @@ class App extends Component {
             />
           ))}
           {showInput ?
-          <form className="add-column-form" onSubmit={this.handleSubmit}>
-            <input 
-              type="text"
-              name="newName"
-              value={newName}
-              placeholder="Enter Column Title"
-              onChange={this.handleChange}
-            />
-            <button className="submit-btn form-btn" type="submit">Add Column</button>
-            <button className="cancel-btn form-btn" onClick={this.toggleInput}>Cancel</button>
-          </form>
+           <AddColumnForm toggleInput={this.toggleInput} onAddColumn={name => this.handleAddColumn(name)} />
           : <button className="add-column-btn" onClick={this.toggleInput}>Add Column</button>
           }
         </div>
