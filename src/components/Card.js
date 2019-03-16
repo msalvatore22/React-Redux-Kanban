@@ -1,29 +1,14 @@
 import React, { Component } from 'react';
+import EditCardForm from './EditCardForm'
 
 class Card extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      newName: "",
       showInput: false
     }
   }
-
-  handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
-  
-  handleSubmit = (e) => {
-    e.preventDefault()
-    let { newName } = this.state
-    if(newName.length === 0) return
-    const {onEditCard} = this.props
-    const name = {name: newName}
-    onEditCard(name)
-    this.clearInput()
-    this.toggleInput()
-  }
-
-  clearInput = () => this.setState({newName: ''})
 
   toggleInput = () => {
     if(!this.state.showInput){
@@ -43,35 +28,31 @@ class Card extends Component {
     this.toggleInput();
   }
 
+
   render(){
     const { card, 
       canMoveLeft, 
       canMoveRight, 
       onMoveLeft, 
       onMoveRight, 
-      onDelete
+      onDelete,
+      onEditCard
     } = this.props
-    const {showInput, newName} = this.state
+    const {showInput} = this.state
     return (
       <div>
       <div className="delete-btn-container">
-        {showInput ? <button className="delete-card-btn" disabled="true">x</button> : <button className="delete-card-btn" onClick={onDelete}>x</button>}
+        {showInput ? <button className="delete-card-btn" disabled={true}>x</button> : <button className="delete-card-btn" onClick={onDelete}>x</button>}
       </div>
         <div className="card">
-          {showInput ? canMoveLeft && <button disabled="true">{'<'}</button> : canMoveLeft && <button onClick={onMoveLeft}>{'<'}</button>}
+          {showInput ? canMoveLeft && <button disabled={true}>{'<'}</button> : canMoveLeft && <button onClick={onMoveLeft}>{'<'}</button>}
             {showInput ?
-            <form onSubmit={this.handleSubmit} ref={node => {this.node = node}}>
-              <input 
-                type="text"
-                name="newName"
-                value={newName}
-                placeholder={card.name}
-                onChange={this.handleChange}
-              />
-            </form>
+            <div ref={node => {this.node = node}}>
+              <EditCardForm card={card} toggleInput={this.toggleInput} onEditCard={name => onEditCard(name)}/>
+            </div>
             : <p onClick={this.toggleInput}>{card.name}</p>
             }
-          {showInput ? canMoveRight && <button disabled="true">{'>'}</button> : canMoveRight && <button onClick={onMoveRight}>{'>'}</button>}
+          {showInput ? canMoveRight && <button disabled={true}>{'>'}</button> : canMoveRight && <button onClick={onMoveRight}>{'>'}</button>}
         </div>
        </div>
   )}

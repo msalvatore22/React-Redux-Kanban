@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Card from './Card'
+import AddCardForm from './AddCardForm'
 
 class Column extends Component {
   constructor(props){
@@ -7,13 +8,10 @@ class Column extends Component {
 
     this.state = {
       newColumnName: "",
-      newCardName: "",
       showInput: false,
       showCardInput: false
     }
   }
-
-  handleChange = ({target: {name, value}}) => this.setState({ [name]: value })
   
   handleSubmit = (e) => {
     e.preventDefault()
@@ -24,17 +22,6 @@ class Column extends Component {
     onEditColumn(name)
     this.clearInput()
     this.toggleInput()
-  }
-
-  handleCardSubmit = (e) => {
-    e.preventDefault()
-    let { newCardName } = this.state
-    if(newCardName.length === 0) return
-    const {onAddCard} = this.props
-    const name = { name: newCardName }
-    onAddCard(name)
-    this.clearInput()
-    this.toggleCardInput()
   }
 
   clearInput = () => this.setState({newColumnName: '', newCardName: ''})
@@ -73,7 +60,7 @@ render(){
     onEditCard, 
     length,
     onRemove } = this.props
-  const {showInput, showCardInput, newColumnName, newCardName} = this.state
+  const {showInput, showCardInput, newColumnName} = this.state
   return (
     <div className="column">
       {showInput ? <button disabled="true" className="remove-column-btn">x</button> : <button className="remove-column-btn" onClick={onRemove}>x</button>}
@@ -100,21 +87,10 @@ render(){
           onMoveRight={() => onMoveRight(cardIndex)}
           onDelete={()=> onDelete(cardIndex)}
           onEditCard={(name) => onEditCard(cardIndex, name)}
-          onAddCard={(name) => onAddCard(name)}
         />
       ))}
       {showCardInput ?
-      <form className="add-card-form" onSubmit={this.handleCardSubmit}>
-          <input 
-            type="text"
-            name="newCardName"
-            value={newCardName}
-            placeholder="Enter Card Title"
-            onChange={this.handleChange}
-          />
-          <button className="submit-btn form-btn" type="submit">Add Card</button>
-          <button className="cancel-btn form-btn" onClick={this.toggleCardInput}>Cancel</button>
-        </form>
+        <AddCardForm toggleCardInput={this.toggleCardInput} onAddCard={name => onAddCard(name)} />
       :
       <button className="add-card-btn" onClick={this.toggleCardInput}>+ Add Card</button>
       }
